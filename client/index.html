@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DUCXL — Premium Design Studio</title>
+  <meta name="description" content="From idea to brand identity in days. DUCXL delivers premium design for startups and growing companies."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+/* ─────────────────────────────────────────
+   DUCXL  |  style.css (inline)
+───────────────────────────────────────── */
+:root{
+  --bg:#060608;--bg2:#0d0d10;--bg3:#141418;--bg4:#1b1b20;
+  --teal:#00ffd5;--teal2:#00ccaa;--purple:#7b74ff;
+  --coral:#ff6040;--amber:#f5a623;--blue:#4fa8e8;
+  --text:#f0f0ee;--muted:#888;--dim:#3a3a3a;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --r:12px;--r-lg:20px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;cursor:none}
+a{color:inherit;text-decoration:none}
+
+/* ── cursor ── */
+#cur{width:10px;height:10px;background:var(--teal);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s,opacity .15s}
+#cur-t{width:28px;height:28px;border:1px solid rgba(0,255,213,.3);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .1s ease,top .1s ease}
+
+/* ── typography ── */
+h1,h2,h3,h4{font-family:'Syne',sans-serif;font-weight:700;line-height:1.1;letter-spacing:-0.02em}
+h1{font-size:clamp(40px,5.5vw,78px);font-weight:800}
+h2{font-size:clamp(28px,4vw,52px)}
+h3{font-size:18px;font-weight:600;color:var(--text);margin-bottom:8px}
+p{color:var(--muted);line-height:1.75}
+.teal{color:var(--teal)}
+
+/* ── inputs ── */
+input,textarea,select{
+  width:100%;background:var(--bg3);border:1px solid var(--border2);
+  border-radius:var(--r);padding:12px 16px;color:var(--text);
+  font-family:'Outfit',sans-serif;font-size:14px;outline:none;
+  transition:border-color .2s;
+}
+input:focus,textarea:focus,select:focus{border-color:var(--teal)}
+textarea{resize:vertical}
+select{cursor:pointer}
+select option{background:var(--bg3)}
+label{display:block;font-size:11px;font-weight:500;color:var(--muted);margin-bottom:6px;letter-spacing:.06em;text-transform:uppercase}
+
+/* ── buttons ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 26px;background:var(--teal);color:#000;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;border:none;border-radius:var(--r);cursor:pointer;transition:opacity .18s,transform .15s;white-space:nowrap}
+.btn:hover{opacity:.85;transform:translateY(-1px)}
+.btn-lg{padding:15px 34px;font-size:15px;border-radius:14px}
+.btn-ghost{display:inline-flex;align-items:center;gap:6px;padding:11px 22px;background:transparent;color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;font-weight:400;border:1px solid var(--border2);border-radius:var(--r);cursor:pointer;transition:border-color .2s,background .2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.04)}
+.btn-outline{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 26px;background:transparent;color:var(--teal);font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;border:1px solid rgba(0,255,213,.3);border-radius:var(--r);cursor:pointer;transition:background .2s,border-color .2s}
+.btn-outline:hover{background:rgba(0,255,213,.07);border-color:var(--teal)}
+.w-full{width:100%}
+
+/* ── layout ── */
+.wrap{max-width:1100px;margin:0 auto;padding:0 40px}
+.sec{padding:96px 0}
+.sec-dark{background:var(--bg2)}
+.sec-head{max-width:640px;margin:0 auto 56px;text-align:center}
+.eyebrow{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;padding:5px 14px;border:1px solid rgba(0,255,213,.22);border-radius:100px}
+.sec-sub{font-size:17px;color:var(--muted);margin-top:14px;line-height:1.75}
+
+/* ── animations ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes glow{0%,100%{opacity:.12;transform:scale(1)}50%{opacity:.24;transform:scale(1.07)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.rv.on{opacity:1;transform:translateY(0)}
+
+/* ── nav ── */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 60px;border-bottom:1px solid var(--border);background:rgba(6,6,8,.92);backdrop-filter:blur(18px)}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--teal);letter-spacing:-.02em}
+.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links a{color:var(--muted);font-size:14px;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-act{display:flex;align-items:center;gap:10px}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.burger span{display:block;width:22px;height:1.5px;background:var(--text)}
+.mob-menu{display:none;flex-direction:column;gap:10px;padding:20px 24px;background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:57px;z-index:99}
+.mob-menu a{font-size:15px;color:var(--muted);padding:8px 0;border-bottom:1px solid var(--border)}
+.mob-menu.open{display:flex}
+
+/* ── hero ── */
+.hero{position:relative;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:60px;padding:96px 60px;max-width:1200px;margin:0 auto;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 80% at 50% 50%,black 30%,transparent 100%);pointer-events:none}
+.hero-glow{position:absolute;top:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(0,255,213,.06) 0%,transparent 70%);pointer-events:none;animation:glow 6s ease-in-out infinite}
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--teal);border:1px solid rgba(0,255,213,.2);border-radius:100px;padding:6px 14px;margin-bottom:22px}
+.bdot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:blink 2s ease-in-out infinite}
+.hero h1{margin-bottom:20px}
+.hero-sub{font-size:17px;color:var(--muted);max-width:480px;margin-bottom:38px}
+.hero-cta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:50px}
+.stats{display:flex;align-items:center;gap:24px}
+.sn{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--teal);line-height:1;display:block}
+.sl{font-size:12px;color:var(--dim)}
+.sdiv{width:1px;height:36px;background:var(--border2)}
+
+/* ── mockup ── */
+.hero-vis{position:relative;display:flex;justify-content:center}
+.mock-card{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r-lg);overflow:hidden;width:100%;max-width:380px;box-shadow:0 24px 60px rgba(0,0,0,.5);animation:float 5s ease-in-out infinite}
+.mock-bar{display:flex;align-items:center;gap:6px;padding:12px 16px;background:var(--bg2);border-bottom:1px solid var(--border)}
+.d{width:10px;height:10px;border-radius:50%}
+.d.r{background:#ff5f57}.d.y{background:#febc2e}.d.g{background:#28c840}
+.mock-url{font-size:11px;color:var(--dim);margin-left:8px;font-family:monospace}
+.mock-body{padding:24px}
+.mock-logo-row{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.mlogo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--teal),var(--purple));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:#000}
+.mbn{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text)}
+.mbt{font-size:11px;color:var(--muted)}
+.palette{display:flex;gap:8px;margin-bottom:20px}
+.sw{width:36px;height:36px;border-radius:8px}
+.mock-foot{display:flex;align-items:center;justify-content:space-between}
+.sbadge{font-size:12px;font-weight:500;padding:4px 12px;border-radius:100px}
+.sbadge.ok{background:rgba(0,255,213,.12);color:var(--teal)}
+.mdate{font-size:12px;color:var(--dim)}
+.fc{position:absolute;display:flex;align-items:center;gap:10px;background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:12px 16px;box-shadow:0 12px 32px rgba(0,0,0,.4);white-space:nowrap}
+.fc .fi{font-size:18px}
+.fc .ft{font-size:13px;font-weight:500;color:var(--text)}
+.fc .fs{font-size:11px;color:var(--muted)}
+.f1{top:-20px;left:-30px;animation:float 4s ease-in-out infinite 1s}
+.f2{bottom:-10px;right:-20px;animation:float 4.5s ease-in-out infinite .5s}
+
+/* ── marquee ── */
+.mq{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:18px 0;background:var(--bg2)}
+.mq-track{display:flex;gap:36px;width:max-content;animation:marquee 30s linear infinite;font-size:13px;font-weight:400;color:var(--dim);letter-spacing:.04em;text-transform:uppercase}
+.mq-track .sep{color:var(--teal)}
+
+/* ── features ── */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;position:relative;transition:border-color .25s,transform .25s}
+.feat-card:hover{border-color:var(--border2);transform:translateY(-4px)}
+.ficon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:20px}
+.feat-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);background:rgba(0,255,213,.08);border:1px solid rgba(0,255,213,.2);padding:3px 10px;border-radius:100px;position:absolute;top:20px;right:20px}
+.feat-card p{font-size:14px;color:var(--muted);line-height:1.7;margin-top:6px}
+
+/* ── process ── */
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.proc-step{display:flex;flex-direction:column;padding:0 24px;position:relative}
+.proc-step:first-child{padding-left:0}
+.proc-step:last-child{padding-right:0}
+.snum{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--teal);display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:rgba(0,255,213,.08);border:1px solid rgba(0,255,213,.2);margin-bottom:16px}
+.proc-step h3{font-size:16px;margin-bottom:8px}
+.proc-step p{font-size:14px}
+.sarr{font-size:20px;color:var(--dim);position:absolute;top:8px;right:-12px;z-index:2}
+.sarr.last{display:none}
+
+/* ── pricing ── */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+.price-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-lg);padding:32px;position:relative;transition:transform .25s}
+.price-card:hover{transform:translateY(-4px)}
+.price-card.feat{border-color:rgba(0,255,213,.3);background:linear-gradient(180deg,rgba(0,255,213,.04) 0%,var(--bg2) 100%)}
+.plan-badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#000;background:var(--teal);padding:4px 12px;border-radius:100px;position:absolute;top:-14px;left:50%;transform:translateX(-50%)}
+.plan-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.plan-price{font-family:'Syne',sans-serif;font-size:42px;font-weight:800;color:var(--text);line-height:1;margin-bottom:8px}
+.plan-desc{font-size:14px;color:var(--muted);margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--border)}
+.plan-feats{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:26px}
+.plan-feats li{font-size:14px;color:#bbb}
+
+/* ── portal ── */
+.portal-wrap{max-width:900px;margin:0 auto}
+.auth-card{max-width:420px;margin:0 auto;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r-lg);padding:36px}
+.atabs{display:flex;gap:0;margin-bottom:28px;background:var(--bg3);border-radius:10px;padding:4px}
+.atab{flex:1;padding:9px 0;background:none;border:none;cursor:pointer;font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;color:var(--muted);border-radius:8px;transition:background .2s,color .2s}
+.atab.on{background:var(--bg4);color:var(--text)}
+.fg{margin-bottom:18px}
+.msg{margin-top:14px;font-size:13px;padding:10px 14px;border-radius:8px;display:none}
+.msg.ok{display:block;background:rgba(0,255,213,.08);color:var(--teal);border:1px solid rgba(0,255,213,.2)}
+.msg.er{display:block;background:rgba(255,80,80,.08);color:#ff7070;border:1px solid rgba(255,80,80,.2)}
+.anote{font-size:12px;color:var(--dim);margin-top:14px;text-align:center}
+.dash-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:32px}
+.dash-head h3{font-family:'Syne',sans-serif;font-size:24px;color:var(--text)}
+.dash-sub{font-size:14px;color:var(--muted);margin-top:4px}
+.dash-grid{display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start}
+.dtitle{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}
+.pform{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;margin-bottom:16px}
+.sidebar{display:flex;flex-direction:column;gap:16px}
+.scard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px}
+.scard-t{font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px}
+.scard-s{font-size:13px;color:var(--muted);margin-bottom:16px}
+.upi-btn{display:block;text-align:center;padding:12px}
+.empty{padding:32px;text-align:center;color:var(--dim);font-size:14px;background:var(--bg2);border:1px dashed var(--border2);border-radius:var(--r-lg)}
+.proj-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.proj-card h4{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+.proj-card p{font-size:13px;color:var(--muted)}
+.pbadge{font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;white-space:nowrap}
+.pbadge.pending{background:rgba(245,166,35,.1);color:var(--amber);border:1px solid rgba(245,166,35,.2)}
+.pbadge.approved{background:rgba(0,255,213,.1);color:var(--teal);border:1px solid rgba(0,255,213,.2)}
+.pbadge.complete{background:rgba(79,168,232,.1);color:var(--blue);border:1px solid rgba(79,168,232,.2)}
+.adm-tabs{display:flex;gap:0;margin-bottom:28px;background:var(--bg3);border-radius:10px;padding:4px;max-width:300px}
+.adm-tab{flex:1;padding:9px 0;background:none;border:none;cursor:pointer;font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;color:var(--muted);border-radius:8px;transition:background .2s,color .2s}
+.adm-tab.on{background:var(--bg4);color:var(--text)}
+.acard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-bottom:14px}
+.acard-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.acard-title{font-size:15px;font-weight:600;color:var(--text)}
+.acard-user{font-size:12px;color:var(--muted);margin-top:2px}
+.acard-brief{font-size:13px;color:#888;line-height:1.65;margin-bottom:14px}
+.acard-acts{display:flex;gap:10px}
+.btn-appr{padding:8px 18px;background:rgba(0,255,213,.1);color:var(--teal);border:1px solid rgba(0,255,213,.25);border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;transition:background .2s}
+.btn-appr:hover{background:rgba(0,255,213,.2)}
+.btn-complete{padding:8px 18px;background:rgba(79,168,232,.1);color:var(--blue);border:1px solid rgba(79,168,232,.25);border-radius:8px;font-size:13px;font-weight:500;cursor:pointer}
+
+/* ── testimonials ── */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.testi-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;transition:border-color .2s}
+.testi-card:hover{border-color:var(--border2)}
+.qmark{font-size:52px;color:var(--teal);opacity:.4;line-height:1;margin-bottom:12px;font-family:Georgia,serif}
+.testi-card>p{font-size:15px;color:#bbb;line-height:1.75;margin-bottom:22px}
+.tauth{display:flex;align-items:center;gap:12px}
+.tavatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--purple));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000;flex-shrink:0}
+.tauth strong{display:block;font-size:14px;font-weight:600;color:var(--text)}
+.tauth span{font-size:12px;color:var(--muted)}
+
+/* ── cta ── */
+.cta-sec{text-align:center;position:relative;overflow:hidden}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:400px;background:radial-gradient(ellipse,rgba(0,255,213,.07) 0%,transparent 70%);pointer-events:none}
+.cta-inner{max-width:700px;margin:0 auto}
+.cta-inner h2{margin-bottom:16px}
+.cta-inner>p{font-size:17px;color:var(--muted);margin-bottom:36px}
+
+/* ── footer ── */
+footer{border-top:1px solid var(--border)}
+.foot-inner{display:flex;gap:80px;padding:60px 40px}
+.foot-brand{max-width:280px}
+.foot-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--teal);margin-bottom:14px}
+.foot-brand p{font-size:14px;line-height:1.75}
+.foot-links{display:flex;gap:60px}
+.foot-col{display:flex;flex-direction:column;gap:12px}
+.foot-col h4{font-family:'Syne',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--text);margin-bottom:4px}
+.foot-col a{font-size:14px;color:var(--muted);transition:color .2s}
+.foot-col a:hover{color:var(--text)}
+.foot-bot{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;border-top:1px solid var(--border);font-size:13px;color:var(--dim)}
+
+/* ── spinner ── */
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.15);border-top-color:var(--teal);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+
+/* ── responsive ── */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding:64px 24px;gap:40px}
+  .hero-vis{display:none}
+  .feat-grid{grid-template-columns:repeat(2,1fr)}
+  .price-grid{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .proc-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .sarr{display:none}
+  .dash-grid{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+  nav{padding:14px 24px}
+  .nav-links,.nav-act{display:none}
+  .burger{display:flex}
+  .wrap{padding:0 24px}
+  .sec{padding:64px 0}
+  .feat-grid{grid-template-columns:1fr}
+  .proc-grid{grid-template-columns:1fr}
+  .foot-inner{flex-direction:column;gap:36px;padding:40px 24px}
+  .foot-links{flex-direction:column;gap:24px}
+  .foot-bot{flex-direction:column;gap:8px;text-align:center;padding:16px 24px}
+  .stats{flex-wrap:wrap;gap:16px}
+  .sdiv{display:none}
+  body{cursor:auto}
+  #cur,#cur-t{display:none}
+}
+  </style>
+</head>
+<body>
+
+<!-- cursors -->
+<div id="cur"></div>
+<div id="cur-t"></div>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <a href="#" class="nav-logo">DUCXL</a>
+  <ul class="nav-links">
+    <li><a href="#features">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#portal">Portal</a></li>
+  </ul>
+  <div class="nav-act">
+    <button class="btn-ghost" onclick="showView('login')">Login</button>
+    <button class="btn" onclick="scrollTo('portal')">Get Started</button>
+  </div>
+  <button class="burger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="#features" onclick="toggleMenu()">Services</a>
+  <a href="#process"  onclick="toggleMenu()">Process</a>
+  <a href="#pricing"  onclick="toggleMenu()">Pricing</a>
+  <a href="#portal"   onclick="toggleMenu()">Portal</a>
+  <button class="btn w-full" onclick="showView('login');toggleMenu()">Login</button>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="badge rv"><span class="bdot"></span>Now accepting new projects</div>
+    <h1 class="rv">Premium brands.<br/><span class="teal">Built fast.</span><br/>Built right.</h1>
+    <p class="hero-sub rv">DUCXL is a design-as-a-service studio — logo, identity system, and everything your startup needs to look world-class from day one.</p>
+    <div class="hero-cta rv">
+      <button class="btn btn-lg" onclick="scrollTo('portal')">Start a Project →</button>
+      <button class="btn-ghost btn-lg" onclick="scrollTo('process')">How it works</button>
+    </div>
+    <div class="stats rv">
+      <div><span class="sn">120+</span><span class="sl">Projects delivered</span></div>
+      <div class="sdiv"></div>
+      <div><span class="sn">48hr</span><span class="sl">Avg turnaround</span></div>
+      <div class="sdiv"></div>
+      <div><span class="sn">98%</span><span class="sl">Satisfaction</span></div>
+    </div>
+  </div>
+  <div class="hero-vis rv">
+    <div class="mock-card">
+      <div class="mock-bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="mock-url">ducxl.com/projects</span></div>
+      <div class="mock-body">
+        <div class="mock-logo-row">
+          <div class="mlogo">DX</div>
+          <div><div class="mbn">FounderOS</div><div class="mbt">Brand Identity · DUCXL</div></div>
+        </div>
+        <div class="palette">
+          <div class="sw" style="background:#0f0f14"></div>
+          <div class="sw" style="background:#00ffd5"></div>
+          <div class="sw" style="background:#6c63ff"></div>
+          <div class="sw" style="background:#ff6040"></div>
+          <div class="sw" style="background:#f5f5f0"></div>
+        </div>
+        <div class="mock-foot">
+          <span class="sbadge ok">✓ Approved</span>
+          <span class="mdate">Delivered in 36h</span>
+        </div>
+      </div>
+    </div>
+    <div class="fc f1 rv"><div class="fi">✦</div><div><div class="ft">Brand delivered</div><div class="fs">2 minutes ago</div></div></div>
+    <div class="fc f2 rv"><div class="fi">⚡</div><div><div class="ft">Payment confirmed</div><div class="fs">via UPI · ₹2,999</div></div></div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="mq">
+  <div class="mq-track">
+    <span>Brand Identity</span><span class="sep">✦</span><span>Logo Design</span><span class="sep">✦</span><span>UI Systems</span><span class="sep">✦</span><span>Pitch Decks</span><span class="sep">✦</span><span>Social Kits</span><span class="sep">✦</span><span>Typography</span><span class="sep">✦</span><span>Color Systems</span><span class="sep">✦</span><span>Motion Design</span><span class="sep">✦</span>
+    <span>Brand Identity</span><span class="sep">✦</span><span>Logo Design</span><span class="sep">✦</span><span>UI Systems</span><span class="sep">✦</span><span>Pitch Decks</span><span class="sep">✦</span><span>Social Kits</span><span class="sep">✦</span><span>Typography</span><span class="sep">✦</span><span>Color Systems</span><span class="sep">✦</span><span>Motion Design</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<!-- ── FEATURES ── -->
+<section class="sec" id="features">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Services</p>
+      <h2>Design that builds<br/><span class="teal">trust at first glance</span></h2>
+      <p class="sec-sub">Every service is crafted for one goal — making your brand impossible to ignore.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card rv"><div class="ficon" style="background:rgba(0,255,213,.1);color:var(--teal)">◈</div><h3>Brand Identity</h3><p>Logo, colour palette, typography — a complete visual language for your company.</p><div class="feat-tag">Most popular</div></div>
+      <div class="feat-card rv"><div class="ficon" style="background:rgba(123,116,255,.1);color:var(--purple)">⊞</div><h3>UI Design System</h3><p>Scalable component libraries and design tokens your engineering team will love.</p></div>
+      <div class="feat-card rv"><div class="ficon" style="background:rgba(255,96,64,.1);color:var(--coral)">◧</div><h3>Pitch Decks</h3><p>Investor-grade slides that communicate vision clearly and help close rounds.</p></div>
+      <div class="feat-card rv"><div class="ficon" style="background:rgba(245,166,35,.1);color:var(--amber)">◉</div><h3>Social Media Kit</h3><p>Templates for every platform — post, reel, banner, story — consistent and on-brand.</p></div>
+      <div class="feat-card rv"><div class="ficon" style="background:rgba(0,255,213,.1);color:var(--teal)">⬡</div><h3>Secure Delivery</h3><p>All files delivered via our platform. Pay only after you approve the work.</p></div>
+      <div class="feat-card rv"><div class="ficon" style="background:rgba(79,168,232,.1);color:var(--blue)">⚡</div><h3>48-hr Delivery</h3><p>Fast doesn't mean rushed. Our process is built for quality at startup speed.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS ── -->
+<section class="sec sec-dark" id="process">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Process</p>
+      <h2>Four steps to a<br/><span class="teal">brand you're proud of</span></h2>
+    </div>
+    <div class="proc-grid">
+      <div class="proc-step rv"><div class="snum">01</div><h3>Submit your brief</h3><p>Describe your project, audience, and vision through our streamlined portal.</p><div class="sarr">→</div></div>
+      <div class="proc-step rv"><div class="snum">02</div><h3>We get to work</h3><p>Our team begins immediately. You get progress updates — no black box.</p><div class="sarr">→</div></div>
+      <div class="proc-step rv"><div class="snum">03</div><h3>Review & approve</h3><p>Designs are delivered for review. Request revisions until you're satisfied.</p><div class="sarr">→</div></div>
+      <div class="proc-step rv"><div class="snum">04</div><h3>Pay & download</h3><p>Pay securely via UPI only after approving. Download all source files.</p><div class="sarr last"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section class="sec" id="pricing">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Pricing</p>
+      <h2>Simple, transparent<br/><span class="teal">pricing</span></h2>
+      <p class="sec-sub">No hidden fees. Pay per project, pay only after you approve.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card rv">
+        <div class="plan-name">Starter</div><div class="plan-price">₹999</div>
+        <div class="plan-desc">Perfect for early-stage ideas and MVPs</div>
+        <ul class="plan-feats"><li>✓ Logo design (3 concepts)</li><li>✓ Brand colour palette</li><li>✓ Font pairing</li><li>✓ 48-hr delivery</li><li>✓ PNG + SVG files</li></ul>
+        <button class="btn-outline w-full" onclick="startProject('Starter','999')">Start Starter</button>
+      </div>
+      <div class="price-card feat rv">
+        <div class="plan-badge">Most Popular</div>
+        <div class="plan-name">Pro</div><div class="plan-price">₹2,999</div>
+        <div class="plan-desc">Full brand identity for serious startups</div>
+        <ul class="plan-feats"><li>✓ Everything in Starter</li><li>✓ Full brand guidelines PDF</li><li>✓ Business card design</li><li>✓ Social media kit (6 templates)</li><li>✓ Unlimited revisions</li><li>✓ Figma + AI source files</li></ul>
+        <button class="btn w-full" onclick="startProject('Pro','2999')">Start Pro</button>
+      </div>
+      <div class="price-card rv">
+        <div class="plan-name">Enterprise</div><div class="plan-price">Custom</div>
+        <div class="plan-desc">Agencies, retainers, and ongoing work</div>
+        <ul class="plan-feats"><li>✓ Everything in Pro</li><li>✓ Dedicated designer</li><li>✓ Monthly retainer plans</li><li>✓ White-label available</li><li>✓ Priority delivery</li><li>✓ Direct Slack support</li></ul>
+        <button class="btn-outline w-full" onclick="startProject('Enterprise','custom')">Contact Us</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLIENT PORTAL ── -->
+<section class="sec sec-dark" id="portal">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Client Portal</p>
+      <h2>Your project dashboard</h2>
+    </div>
+
+    <!-- AUTH -->
+    <div id="v-auth" class="portal-wrap">
+      <div class="auth-card rv">
+        <div class="atabs">
+          <button class="atab on" id="tab-l" onclick="switchTab('l')">Login</button>
+          <button class="atab"    id="tab-s" onclick="switchTab('s')">Sign Up</button>
+        </div>
+        <div id="f-login">
+          <div class="fg"><label>Email</label><input type="email" id="l-email" placeholder="you@startup.com"/></div>
+          <div class="fg"><label>Password</label><input type="password" id="l-pass" placeholder="••••••••"/></div>
+          <button class="btn w-full" onclick="doLogin()">Login to Portal</button>
+          <p class="anote">Admin? Use your admin credentials.</p>
+        </div>
+        <div id="f-signup" style="display:none">
+          <div class="fg"><label>Full Name</label><input type="text" id="s-name" placeholder="Your name"/></div>
+          <div class="fg"><label>Email</label><input type="email" id="s-email" placeholder="you@startup.com"/></div>
+          <div class="fg"><label>Password</label><input type="password" id="s-pass" placeholder="Min. 8 characters"/></div>
+          <button class="btn w-full" onclick="doSignup()">Create Account</button>
+        </div>
+        <div id="auth-msg" class="msg"></div>
+      </div>
+    </div>
+
+    <!-- CLIENT DASHBOARD -->
+    <div id="v-dash" class="portal-wrap" style="display:none">
+      <div class="dash-head rv">
+        <div><h3 id="d-greet">Welcome back 👋</h3><p class="dash-sub">Track your projects and submit new work</p></div>
+        <button class="btn-ghost" onclick="doLogout()">Logout</button>
+      </div>
+      <div class="dash-grid">
+        <div>
+          <div class="dtitle">Submit New Project</div>
+          <div class="pform">
+            <div class="fg"><label>Project Name</label><input type="text" id="p-name" placeholder="e.g. FounderOS Launch"/></div>
+            <div class="fg">
+              <label>Service</label>
+              <select id="p-service">
+                <option value="">Select a service</option>
+                <option value="Brand Identity">Brand Identity</option>
+                <option value="Logo Only">Logo Design Only</option>
+                <option value="UI Design System">UI Design System</option>
+                <option value="Pitch Deck">Pitch Deck</option>
+                <option value="Social Media Kit">Social Media Kit</option>
+                <option value="Full Brand Package">Full Brand Package (Pro)</option>
+              </select>
+            </div>
+            <div class="fg"><label>Brief — tell us everything</label><textarea id="p-brief" rows="4" placeholder="Describe your brand, target audience, competitors you admire, aesthetic direction..."></textarea></div>
+            <div class="fg"><label>Reference links (optional)</label><input type="text" id="p-refs" placeholder="Figma, Pinterest, website URLs..."/></div>
+            <button class="btn" onclick="submitProject()">Submit Project →</button>
+            <div id="p-msg" class="msg"></div>
+          </div>
+          <div class="dtitle" style="margin-top:32px">Your Projects</div>
+          <div id="proj-list"><div class="empty">No projects yet. Submit your first one above.</div></div>
+        </div>
+        <div class="sidebar">
+          <div class="scard">
+            <div class="scard-t">Quick Pay</div>
+            <p class="scard-s">Approved a project? Pay securely here.</p>
+            <div class="fg"><label>UPI Transaction ID</label><input type="text" id="txn" placeholder="e.g. UPI12345678901"/></div>
+            <a id="pay-link" href="upi://pay?pa=skdharani630@oksbi&pn=DUCXL&cu=INR" class="btn upi-btn w-full" target="_blank">Open UPI App ↗</a>
+            <button class="btn-outline w-full" style="margin-top:10px" onclick="submitPayment()">Confirm Payment</button>
+            <div id="pay-msg" class="msg"></div>
+          </div>
+          <div class="scard">
+            <div class="scard-t">Need help?</div>
+            <p class="scard-s">We reply within 2 hours during business hours.</p>
+            <a href="mailto:skdrago777@gmail.com" class="btn-ghost w-full" style="display:block;text-align:center;padding:10px">Email Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN -->
+    <div id="v-admin" class="portal-wrap" style="display:none">
+      <div class="dash-head">
+        <div><h3>Admin Panel</h3><p class="dash-sub">Manage all projects and payments</p></div>
+        <button class="btn-ghost" onclick="doLogout()">Logout</button>
+      </div>
+      <div class="adm-tabs">
+        <button class="adm-tab on" id="at-p" onclick="switchAdminTab('p')">Projects</button>
+        <button class="adm-tab"    id="at-pay" onclick="switchAdminTab('pay')">Payments</button>
+      </div>
+      <div id="adm-proj"><div class="empty">Loading...</div></div>
+      <div id="adm-pay"  style="display:none"><div class="empty">Loading...</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Clients</p>
+      <h2>Trusted by founders<br/><span class="teal">who move fast</span></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card rv"><div class="qmark">"</div><p>DUCXL delivered our entire brand in 36 hours. The quality was indistinguishable from agencies charging 10x more.</p><div class="tauth"><div class="tavatar">RK</div><div><strong>Rahul K.</strong><span>Founder, StackOps</span></div></div></div>
+      <div class="testi-card rv"><div class="qmark">"</div><p>The pay-after-approval model is a game changer. Total trust in the process and the final result blew us away.</p><div class="tauth"><div class="tavatar">PV</div><div><strong>Priya V.</strong><span>CEO, NovaMed</span></div></div></div>
+      <div class="testi-card rv"><div class="qmark">"</div><p>We needed a pitch deck for a Series A meeting in 48 hours. DUCXL made it happen. We got the meeting.</p><div class="tauth"><div class="tavatar">AM</div><div><strong>Arjun M.</strong><span>CTO, BuildSpark</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="sec cta-sec">
+  <div class="cta-glow"></div>
+  <div class="wrap">
+    <div class="cta-inner rv">
+      <h2>Your brand is your<br/>first impression.<br/><span class="teal">Make it unforgettable.</span></h2>
+      <p>Start your project today. Pay only when you love it.</p>
+      <button class="btn btn-lg" onclick="scrollTo('portal')">Launch Your Brand →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <div class="foot-logo">DUCXL</div>
+      <p>Premium design for ambitious startups. Fast delivery, fair pricing, guaranteed satisfaction.</p>
+    </div>
+    <div class="foot-links">
+      <div class="foot-col">
+        <h4>Services</h4>
+        <a href="#features">Brand Identity</a>
+        <a href="#features">UI Systems</a>
+        <a href="#features">Pitch Decks</a>
+        <a href="#features">Social Kits</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#process">How it Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#portal">Client Portal</a>
+        <a href="mailto:skdrago777@gmail.com">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bot">
+    <p>© 2025 DUCXL. All rights reserved.</p>
+    <p>UPI: skdharani630@oksbi</p>
+  </div>
+</footer>
+
+<!-- ── FIREBASE SDK ── -->
+<script type="module">
+import { initializeApp }           from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword,
+         createUserWithEmailAndPassword, signOut,
+         onAuthStateChanged }      from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, collection, addDoc,
+         onSnapshot, query, where,
+         orderBy, doc, updateDoc,
+         serverTimestamp }         from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+/* ════════════════════════════════════════
+   🔑 PASTE YOUR FIREBASE CONFIG HERE
+   Firebase Console → Project Settings → General → Your apps
+   ════════════════════════════════════════ */
+const FIREBASE_CONFIG = {
+  apiKey:            "PASTE_YOUR_API_KEY",
+  authDomain:        "PASTE_YOUR_AUTH_DOMAIN",
+  projectId:         "PASTE_YOUR_PROJECT_ID",
+  storageBucket:     "PASTE_YOUR_STORAGE_BUCKET",
+  messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID",
+  appId:             "PASTE_YOUR_APP_ID"
+};
+
+/* ════════════════════════════════════════
+   🔑 YOUR ADMIN EMAIL
+   ════════════════════════════════════════ */
+const ADMIN = "skdrago777@gmail.com";
+
+/* ── INIT ── */
+const fbApp = initializeApp(FIREBASE_CONFIG);
+const auth  = getAuth(fbApp);
+const db    = getFirestore(fbApp);
+
+/* ── AUTH STATE ── */
+let me = null;
+onAuthStateChanged(auth, user => {
+  me = user;
+  if (user) {
+    if (user.email === ADMIN) { showView("admin"); loadAdminProjects(); }
+    else { showView("dash"); loadMyProjects(); }
+  } else {
+    showView("login");
+  }
+});
+
+/* ── HELPERS ── */
+function esc(s=""){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;") }
+function msg(id,html,type){ const el=document.getElementById(id); el.innerHTML=html; el.className="msg "+type }
+function fmtErr(code){
+  return {
+    "auth/user-not-found":"No account found with that email.",
+    "auth/wrong-password":"Incorrect password.",
+    "auth/email-already-in-use":"An account with this email already exists.",
+    "auth/weak-password":"Password must be at least 8 characters.",
+    "auth/invalid-email":"Please enter a valid email address.",
+    "auth/too-many-requests":"Too many attempts. Try again later.",
+    "auth/invalid-credential":"Email or password is incorrect."
+  }[code] || "Something went wrong. Please try again.";
+}
+
+/* ── AUTH LOGIC ── */
+async function doLogin(){
+  const email=document.getElementById("l-email").value.trim();
+  const pass =document.getElementById("l-pass").value;
+  if(!email||!pass) return msg("auth-msg","Please fill in all fields.","er");
+  msg("auth-msg",'<span class="spin"></span>Signing in…',"ok");
+  try{ await signInWithEmailAndPassword(auth,email,pass); }
+  catch(e){ msg("auth-msg",fmtErr(e.code),"er"); }
+}
+async function doSignup(){
+  const name =document.getElementById("s-name").value.trim();
+  const email=document.getElementById("s-email").value.trim();
+  const pass =document.getElementById("s-pass").value;
+  if(!name||!email||!pass) return msg("auth-msg","Please fill in all fields.","er");
+  if(pass.length<8) return msg("auth-msg","Password must be at least 8 characters.","er");
+  msg("auth-msg",'<span class="spin"></span>Creating account…',"ok");
+  try{
+    const c=await createUserWithEmailAndPassword(auth,email,pass);
+    await addDoc(collection(db,"users"),{uid:c.user.uid,name,email,createdAt:serverTimestamp()});
+  }catch(e){ msg("auth-msg",fmtErr(e.code),"er"); }
+}
+async function doLogout(){ await signOut(auth); showView("login"); }
+
+/* ── PROJECT SUBMIT ── */
+async function submitProject(){
+  const name  =document.getElementById("p-name").value.trim();
+  const svc   =document.getElementById("p-service").value;
+  const brief =document.getElementById("p-brief").value.trim();
+  const refs  =document.getElementById("p-refs").value.trim();
+  if(!name||!svc||!brief) return msg("p-msg","Please fill in name, service, and brief.","er");
+  msg("p-msg",'<span class="spin"></span>Submitting…',"ok");
+  try{
+    await addDoc(collection(db,"projects"),{
+      userId:me.uid, userEmail:me.email,
+      name,service:svc,brief,refs,
+      status:"pending", paid:false,
+      createdAt:serverTimestamp()
+    });
+    msg("p-msg","✓ Submitted! We'll review and respond within 2 hours.","ok");
+    ["p-name","p-brief","p-refs"].forEach(id=>document.getElementById(id).value="");
+    document.getElementById("p-service").value="";
+  }catch(e){ msg("p-msg","Failed to submit. Please try again.","er"); }
+}
+
+/* ── PAYMENT SUBMIT (direct to Firestore) ── */
+async function submitPayment(){
+  const txn=document.getElementById("txn").value.trim();
+  if(!txn||txn.length<8) return msg("pay-msg","Enter a valid UPI Transaction ID.","er");
+  msg("pay-msg",'<span class="spin"></span>Submitting…',"ok");
+  try{
+    /* Check for duplicates */
+    const snap=await new Promise(res=>{
+      const q=query(collection(db,"payments"),where("txn","==",txn.toUpperCase()));
+      onSnapshot(q,s=>res(s),{once:true});
+    });
+    // Simple Firestore duplicate check
+    await addDoc(collection(db,"payments"),{
+      txn:txn.toUpperCase(), userId:me.uid,
+      userEmail:me.email, status:"pending",
+      createdAt:serverTimestamp()
+    });
+    msg("pay-msg","✓ Payment submitted! We'll verify within 30 minutes.","ok");
+    document.getElementById("txn").value="";
+  }catch(e){ msg("pay-msg","Submission failed. Please try again.","er"); }
+}
+
+/* ── LOAD MY PROJECTS ── */
+function loadMyProjects(){
+  const el=document.getElementById("proj-list");
+  if(!me) return;
+  onSnapshot(
+    query(collection(db,"projects"),where("userId","==",me.uid),orderBy("createdAt","desc")),
+    snap=>{
+      if(snap.empty){ el.innerHTML='<div class="empty">No projects yet.</div>'; return; }
+      el.innerHTML=snap.docs.map(d=>{
+        const x=d.data();
+        const date=x.createdAt?.toDate?x.createdAt.toDate().toLocaleDateString():"Just now";
+        const bc=x.status==="approved"?"approved":x.status==="complete"?"complete":"pending";
+        const bl=x.status==="approved"?"✓ Approved":x.status==="complete"?"Complete":"Under Review";
+        return `<div class="proj-card"><div><h4>${esc(x.name)}</h4><p>${esc(x.service)} · ${date}</p></div><span class="pbadge ${bc}">${bl}</span></div>`;
+      }).join("");
+    }
+  );
+}
+
+/* ── ADMIN: PROJECTS ── */
+function loadAdminProjects(){
+  const el=document.getElementById("adm-proj");
+  onSnapshot(
+    query(collection(db,"projects"),orderBy("createdAt","desc")),
+    snap=>{
+      if(snap.empty){ el.innerHTML='<div class="empty">No projects.</div>'; return; }
+      el.innerHTML=snap.docs.map(d=>{
+        const x=d.data(); const id=d.id;
+        const date=x.createdAt?.toDate?x.createdAt.toDate().toLocaleDateString():"";
+        const approveBtn = x.status==="pending"
+          ? `<button class="btn-appr" onclick="adminApprove('${id}','projects','approved')">Approve</button>` : "";
+        const completeBtn = x.status==="approved"
+          ? `<button class="btn-complete" onclick="adminApprove('${id}','projects','complete')">Complete</button>` : "";
+        return `<div class="acard"><div class="acard-head"><div><div class="acard-title">${esc(x.name)} — ${esc(x.service)}</div><div class="acard-user">${esc(x.userEmail)} · ${date}</div></div><span class="pbadge ${x.status}">${x.status}</span></div><p class="acard-brief">${esc((x.brief||"").substring(0,220))}</p><div class="acard-acts">${approveBtn}${completeBtn}</div></div>`;
+      }).join("");
+    }
+  );
+}
+
+/* ── ADMIN: PAYMENTS ── */
+function loadAdminPayments(){
+  const el=document.getElementById("adm-pay");
+  onSnapshot(
+    query(collection(db,"payments"),orderBy("createdAt","desc")),
+    snap=>{
+      if(snap.empty){ el.innerHTML='<div class="empty">No payments.</div>'; return; }
+      el.innerHTML=snap.docs.map(d=>{
+        const x=d.data(); const id=d.id;
+        const date=x.createdAt?.toDate?x.createdAt.toDate().toLocaleDateString():"";
+        const approveBtn=x.status==="pending"?`<button class="btn-appr" onclick="adminApprove('${id}','payments','approved')">Approve</button>`:"";
+        return `<div class="acard"><div class="acard-head"><div><div class="acard-title">TXN: ${esc(x.txn)}</div><div class="acard-user">${esc(x.userEmail)} · ${date}</div></div><span class="pbadge ${x.status}">${x.status}</span></div><div class="acard-acts">${approveBtn}</div></div>`;
+      }).join("");
+    }
+  );
+}
+
+/* ── ADMIN UPDATE ── */
+async function adminApprove(id,col,status){
+  await updateDoc(doc(db,col,id),{status,updatedAt:serverTimestamp()});
+}
+
+/* ── EXPOSE TO HTML ── */
+window.doLogin=doLogin; window.doSignup=doSignup; window.doLogout=doLogout;
+window.submitProject=submitProject; window.submitPayment=submitPayment;
+window.adminApprove=adminApprove;
+window.switchAdminTab=function(t){
+  ["p","pay"].forEach(x=>{ document.getElementById("at-"+x).classList.toggle("on",x===t); document.getElementById("adm-"+(x==="p"?"proj":"pay")).style.display=x===t?"block":"none"; });
+  if(t==="pay") loadAdminPayments();
+};
+</script>
+
+<script>
+/* ── CURSOR ── */
+const cur=document.getElementById("cur"),trail=document.getElementById("cur-t");
+document.addEventListener("mousemove",e=>{
+  cur.style.left=e.clientX+"px"; cur.style.top=e.clientY+"px";
+  setTimeout(()=>{ trail.style.left=e.clientX+"px"; trail.style.top=e.clientY+"px"; },90);
+});
+document.querySelectorAll("button,a,input,textarea,select").forEach(el=>{
+  el.addEventListener("mouseenter",()=>{cur.style.width="18px";cur.style.height="18px";cur.style.opacity=".45"});
+  el.addEventListener("mouseleave",()=>{cur.style.width="10px";cur.style.height="10px";cur.style.opacity="1"});
+});
+
+/* ── SCROLL REVEAL ── */
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("on"); }),{threshold:.1});
+document.querySelectorAll(".rv").forEach(el=>obs.observe(el));
+
+/* ── HELPERS ── */
+function scrollTo(id){ document.getElementById(id).scrollIntoView({behavior:"smooth"}); }
+function toggleMenu(){ document.getElementById("mobMenu").classList.toggle("open"); }
+
+function showView(v){
+  ["v-auth","v-dash","v-admin"].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display="none"});
+  const map={login:"v-auth",signup:"v-auth",dash:"v-dash",admin:"v-admin"};
+  const el=document.getElementById(map[v]||"v-auth");
+  if(el) el.style.display="block";
+  if(v==="login"||v==="signup") switchTab(v==="login"?"l":"s");
+  document.getElementById("portal").scrollIntoView({behavior:"smooth"});
+}
+
+function switchTab(t){
+  document.getElementById("tab-l").classList.toggle("on",t==="l");
+  document.getElementById("tab-s").classList.toggle("on",t==="s");
+  document.getElementById("f-login").style.display=t==="l"?"block":"none";
+  document.getElementById("f-signup").style.display=t==="s"?"block":"none";
+}
+
+function startProject(plan,price){
+  document.getElementById("portal").scrollIntoView({behavior:"smooth"});
+}
+
+window.showView=showView; window.switchTab=switchTab;
+window.toggleMenu=toggleMenu; window.startProject=startProject;
+</script>
+</body>
+</html>

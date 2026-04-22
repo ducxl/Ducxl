@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>DUCXL — Premium Design Studio</title>
+<meta name="description" content="From idea to brand identity in days. DUCXL delivers premium design for startups."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ── RESET & VARIABLES ───────────────────────── */
+:root{
+  --bg:#060608;--bg2:#0e0e12;--bg3:#16161c;--bg4:#1e1e26;
+  --teal:#00ffd5;--purple:#7b74ff;--coral:#ff6040;--amber:#f5a623;--blue:#4fa8e8;
+  --text:#f0f0ee;--muted:#888;--dim:#3a3a3a;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --r:12px;--r-lg:20px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+input,textarea,select{
+  width:100%;background:var(--bg3);border:1px solid var(--border2);
+  border-radius:var(--r);padding:12px 16px;color:var(--text);
+  font-family:'Outfit',sans-serif;font-size:14px;outline:none;transition:border-color .2s;
+}
+input:focus,textarea:focus,select:focus{border-color:var(--teal)}
+textarea{resize:vertical}
+select option{background:var(--bg3)}
+label{display:block;font-size:11px;font-weight:500;color:var(--muted);margin-bottom:6px;letter-spacing:.07em;text-transform:uppercase}
+
+/* ── TYPOGRAPHY ──────────────────────────────── */
+h1,h2,h3,h4{font-family:'Syne',sans-serif;font-weight:700;line-height:1.08;letter-spacing:-.02em}
+h1{font-size:clamp(40px,6vw,80px);font-weight:800}
+h2{font-size:clamp(28px,4vw,52px)}
+h3{font-size:18px;font-weight:600;color:var(--text);margin-bottom:8px}
+p{color:var(--muted);line-height:1.75}
+.text-teal{color:var(--teal)}
+
+/* ── BUTTONS ─────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+     font-family:'Outfit',sans-serif;font-weight:500;cursor:pointer;transition:.18s;border:none;
+     border-radius:var(--r);font-size:14px;padding:11px 24px;white-space:nowrap}
+.btn-primary{background:var(--teal);color:#000;font-weight:600}
+.btn-primary:hover{opacity:.83;transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border2)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.04)}
+.btn-outline{background:transparent;color:var(--teal);border:1px solid rgba(0,255,213,.3)}
+.btn-outline:hover{background:rgba(0,255,213,.07);border-color:var(--teal)}
+.btn-lg{padding:14px 32px;font-size:15px;border-radius:14px}
+.btn-sm{padding:7px 16px;font-size:13px}
+.w100{width:100%;justify-content:center}
+
+/* ── LAYOUT ──────────────────────────────────── */
+.container{max-width:1100px;margin:0 auto;padding:0 40px}
+.section{padding:96px 0}
+.section-dark{background:var(--bg2)}
+.section-header{max-width:640px;margin:0 auto 60px;text-align:center}
+.eyebrow{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+         color:var(--teal);margin-bottom:16px;padding:5px 14px;border:1px solid rgba(0,255,213,.22);border-radius:100px}
+.section-sub{font-size:16px;color:var(--muted);margin-top:14px;line-height:1.75}
+.form-group{margin-bottom:16px}
+.msg{margin-top:12px;font-size:13px;padding:10px 14px;border-radius:8px;display:none}
+.msg.ok{display:block;background:rgba(0,255,213,.08);color:var(--teal);border:1px solid rgba(0,255,213,.2)}
+.msg.err{display:block;background:rgba(255,80,80,.08);color:#ff7070;border:1px solid rgba(255,80,80,.2)}
+
+/* ── ANIMATIONS ──────────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes glow{0%,100%{opacity:.14;transform:scale(1)}50%{opacity:.26;transform:scale(1.07)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.15);
+         border-top-color:var(--teal);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+
+/* ── NAV ─────────────────────────────────────── */
+nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;
+    padding:16px 60px;border-bottom:1px solid var(--border);
+    background:rgba(6,6,8,.92);backdrop-filter:blur(18px)}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--teal);letter-spacing:-.02em}
+.nav-links{display:flex;gap:38px;list-style:none}
+.nav-links a{color:var(--muted);font-size:14px;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.burger span{display:block;width:22px;height:1.5px;background:var(--text);transition:.2s}
+.mobile-menu{display:none;flex-direction:column;gap:0;background:var(--bg2);
+             border-bottom:1px solid var(--border);position:sticky;top:57px;z-index:199}
+.mobile-menu a{padding:14px 24px;font-size:15px;color:var(--muted);border-bottom:1px solid var(--border)}
+.mobile-menu .btn{margin:16px 24px 16px}
+.mobile-menu.open{display:flex}
+
+/* ── HERO ─────────────────────────────────────── */
+.hero{position:relative;display:grid;grid-template-columns:1fr 1fr;
+      align-items:center;gap:60px;padding:100px 60px 90px;max-width:1200px;margin:0 auto;overflow:hidden}
+.hero-grid{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 70% 80% at 50% 50%,black 20%,transparent 100%);
+  pointer-events:none}
+.hero-glow{position:absolute;top:-80px;right:-80px;width:560px;height:560px;
+  background:radial-gradient(circle,rgba(0,255,213,.07) 0%,transparent 70%);
+  pointer-events:none;animation:glow 6s ease-in-out infinite}
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--teal);
+       border:1px solid rgba(0,255,213,.2);border-radius:100px;padding:6px 14px;margin-bottom:22px}
+.bdot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:blink 2s ease-in-out infinite}
+.hero h1{color:var(--text);margin-bottom:18px}
+.hero-sub{font-size:17px;max-width:480px;margin-bottom:38px}
+.hero-cta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:50px}
+.stats{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.stat-n{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;color:var(--teal);line-height:1;display:block}
+.stat-l{font-size:12px;color:var(--dim)}
+.sdiv{width:1px;height:34px;background:var(--border2)}
+
+/* ── HERO VISUAL ─────────────────────────────── */
+.hero-vis{position:relative;display:flex;justify-content:center}
+.mockup{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r-lg);
+        overflow:hidden;width:100%;max-width:380px;box-shadow:0 28px 64px rgba(0,0,0,.55);
+        animation:float 5s ease-in-out infinite}
+.m-head{display:flex;align-items:center;gap:6px;padding:12px 16px;background:var(--bg2);
+        border-bottom:1px solid var(--border)}
+.dot{width:10px;height:10px;border-radius:50%}
+.dr{background:#ff5f57}.dy{background:#febc2e}.dg{background:#28c840}
+.m-url{font-size:11px;color:var(--dim);margin-left:8px;font-family:monospace}
+.m-body{padding:24px}
+.m-logo-row{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.m-logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--teal),var(--purple));
+        display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:#000}
+.m-brand{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text)}
+.m-tag{font-size:11px;color:var(--muted)}
+.palette{display:flex;gap:8px;margin-bottom:20px}
+.sw{width:36px;height:36px;border-radius:8px}
+.m-status{display:flex;align-items:center;justify-content:space-between}
+.sbadge{font-size:12px;font-weight:500;padding:4px 12px;border-radius:100px}
+.sbadge.ok{background:rgba(0,255,213,.12);color:var(--teal)}
+.m-date{font-size:12px;color:var(--dim)}
+.fc{position:absolute;display:flex;align-items:center;gap:10px;background:var(--bg3);
+    border:1px solid var(--border2);border-radius:12px;padding:12px 16px;
+    box-shadow:0 12px 32px rgba(0,0,0,.4);white-space:nowrap}
+.fc .i{font-size:18px}
+.fc .ft{font-size:13px;font-weight:500;color:var(--text)}
+.fc .fs{font-size:11px;color:var(--muted)}
+.f1{top:-18px;left:-28px;animation:float 4s ease-in-out infinite 1s}
+.f2{bottom:-10px;right:-18px;animation:float 4.5s ease-in-out infinite .5s}
+
+/* ── MARQUEE ─────────────────────────────────── */
+.mq-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+         padding:18px 0;background:var(--bg2)}
+.mq-track{display:flex;gap:36px;width:max-content;animation:marquee 30s linear infinite;
+          font-size:12px;font-weight:400;color:var(--dim);letter-spacing:.05em;text-transform:uppercase}
+.mq-track .s{color:var(--teal)}
+
+/* ── FEATURES ────────────────────────────────── */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-lg);
+           padding:28px;position:relative;transition:border-color .25s,transform .25s}
+.feat-card:hover{border-color:var(--border2);transform:translateY(-4px)}
+.feat-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+           font-size:20px;margin-bottom:18px;border:1px solid}
+.feat-card p{font-size:14px;color:var(--muted);line-height:1.7;margin-top:6px}
+.popular-tag{position:absolute;top:18px;right:18px;font-size:10px;font-weight:600;
+             letter-spacing:.1em;text-transform:uppercase;color:var(--teal);
+             background:rgba(0,255,213,.08);border:1px solid rgba(0,255,213,.2);
+             padding:3px 10px;border-radius:100px}
+
+/* ── PROCESS ─────────────────────────────────── */
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.proc-step{padding:0 24px;position:relative}
+.proc-step:first-child{padding-left:0}
+.proc-step:last-child{padding-right:0}
+.step-n{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;
+        color:var(--teal);background:rgba(0,255,213,.08);border:1px solid rgba(0,255,213,.2);
+        display:inline-flex;align-items:center;justify-content:center;
+        width:36px;height:36px;border-radius:8px;margin-bottom:16px}
+.step-arr{font-size:22px;color:var(--dim);position:absolute;top:7px;right:-14px;z-index:1}
+.step-last{display:none}
+.proc-step h3{font-size:16px;color:var(--text);margin-bottom:8px}
+.proc-step p{font-size:14px;line-height:1.7}
+
+/* ── PRICING ─────────────────────────────────── */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+.price-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-lg);
+            padding:32px;position:relative;transition:transform .25s}
+.price-card:hover{transform:translateY(-4px)}
+.price-card.feat{border-color:rgba(0,255,213,.3);
+                 background:linear-gradient(180deg,rgba(0,255,213,.04) 0%,var(--bg2) 100%)}
+.plan-tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+          font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+          color:#000;background:var(--teal);padding:4px 14px;border-radius:100px;white-space:nowrap}
+.plan-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:var(--muted);
+           text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.plan-price{font-family:'Syne',sans-serif;font-size:44px;font-weight:800;color:var(--text);line-height:1;margin-bottom:6px}
+.plan-desc{font-size:14px;color:var(--muted);margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--border)}
+.plan-feats{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:26px}
+.plan-feats li{font-size:14px;color:#bbb}
+
+/* ── PORTAL ──────────────────────────────────── */
+.portal-wrap{max-width:860px;margin:0 auto}
+.auth-card{max-width:420px;margin:0 auto;background:var(--bg2);border:1px solid var(--border2);
+           border-radius:var(--r-lg);padding:36px}
+.auth-tabs{display:flex;background:var(--bg3);border-radius:10px;padding:4px;margin-bottom:28px}
+.atab{flex:1;padding:9px 0;background:none;border:none;cursor:pointer;font-family:'Outfit',sans-serif;
+      font-size:14px;font-weight:500;color:var(--muted);border-radius:8px;transition:.2s}
+.atab.on{background:var(--bg4);color:var(--text)}
+.auth-note{font-size:12px;color:var(--dim);margin-top:12px;text-align:center}
+.dash-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:30px;flex-wrap:wrap;gap:12px}
+.dash-hdr h3{font-family:'Syne',sans-serif;font-size:22px;color:var(--text)}
+.dash-sub{font-size:14px;color:var(--muted);margin-top:3px}
+.dash-grid{display:grid;grid-template-columns:1fr 280px;gap:22px;align-items:start}
+.dash-stitle{font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--muted);
+             text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}
+.proj-form{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px;margin-bottom:14px}
+.sidebar{display:flex;flex-direction:column;gap:14px}
+.sc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px}
+.sc-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--text);margin-bottom:5px}
+.sc-sub{font-size:13px;color:var(--muted);margin-bottom:14px}
+.proj-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);
+           padding:18px 20px;margin-bottom:10px;display:flex;align-items:center;
+           justify-content:space-between;gap:14px;flex-wrap:wrap}
+.proj-card h4{font-size:15px;font-weight:600;color:var(--text);margin-bottom:3px}
+.proj-card p{font-size:13px;color:var(--muted)}
+.pbadge{font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;white-space:nowrap;border:1px solid}
+.pbadge.pending{background:rgba(245,166,35,.08);color:var(--amber);border-color:rgba(245,166,35,.2)}
+.pbadge.approved{background:rgba(0,255,213,.08);color:var(--teal);border-color:rgba(0,255,213,.2)}
+.pbadge.complete{background:rgba(79,168,232,.08);color:var(--blue);border-color:rgba(79,168,232,.2)}
+.empty{padding:28px;text-align:center;color:var(--dim);font-size:14px;
+       background:var(--bg2);border:1px dashed var(--border2);border-radius:var(--r-lg)}
+.admin-tabs{display:flex;background:var(--bg3);border-radius:10px;padding:4px;max-width:260px;margin-bottom:24px}
+.admin-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:12px}
+.admin-card-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.admin-card-title{font-size:15px;font-weight:600;color:var(--text)}
+.admin-card-user{font-size:12px;color:var(--muted);margin-top:2px}
+.admin-card-brief{font-size:13px;color:#888;line-height:1.65;margin-bottom:12px}
+.btn-approve{padding:7px 16px;background:rgba(0,255,213,.08);color:var(--teal);
+             border:1px solid rgba(0,255,213,.22);border-radius:8px;font-size:13px;
+             font-weight:500;cursor:pointer;transition:background .2s;font-family:'Outfit',sans-serif}
+.btn-approve:hover{background:rgba(0,255,213,.18)}
+
+/* ── TESTIMONIALS ────────────────────────────── */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.testi-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-lg);
+            padding:28px;transition:border-color .2s}
+.testi-card:hover{border-color:var(--border2)}
+.quote{font-size:52px;color:var(--teal);opacity:.35;line-height:1;margin-bottom:10px;font-family:Georgia,serif}
+.testi-card>p{font-size:15px;color:#bbb;line-height:1.75;margin-bottom:20px}
+.testi-author{display:flex;align-items:center;gap:12px}
+.av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--purple));
+    display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000;flex-shrink:0}
+.testi-author strong{display:block;font-size:14px;font-weight:600;color:var(--text)}
+.testi-author span{font-size:12px;color:var(--muted)}
+
+/* ── CTA ─────────────────────────────────────── */
+.cta-sec{text-align:center;position:relative;overflow:hidden}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:400px;
+          background:radial-gradient(ellipse,rgba(0,255,213,.07) 0%,transparent 70%);pointer-events:none}
+.cta-inner{max-width:680px;margin:0 auto;position:relative}
+.cta-inner h2{margin-bottom:14px}
+.cta-inner>p{font-size:17px;margin-bottom:34px}
+
+/* ── FOOTER ──────────────────────────────────── */
+footer{border-top:1px solid var(--border)}
+.footer-in{display:flex;gap:80px;padding:60px 40px}
+.f-brand{max-width:280px}
+.f-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--teal);margin-bottom:12px}
+.f-brand p{font-size:14px;line-height:1.75}
+.f-links{display:flex;gap:60px}
+.f-col{display:flex;flex-direction:column;gap:12px}
+.f-col h4{font-family:'Syne',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;
+          letter-spacing:.1em;color:var(--text);margin-bottom:5px}
+.f-col a{font-size:14px;color:var(--muted);transition:color .2s}
+.f-col a:hover{color:var(--text)}
+.footer-bot{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;
+            border-top:1px solid var(--border);font-size:13px;color:var(--dim);flex-wrap:wrap;gap:8px}
+
+/* ── RESPONSIVE ──────────────────────────────── */
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr;padding:64px 24px;gap:0}
+  .hero-vis{display:none}
+  .feat-grid,.proc-grid{grid-template-columns:repeat(2,1fr)}
+  .price-grid,.testi-grid{grid-template-columns:1fr}
+  .dash-grid{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+  nav{padding:14px 24px}
+  .nav-links,.nav-actions{display:none}
+  .burger{display:flex}
+  .container{padding:0 20px}
+  .section{padding:64px 0}
+  .feat-grid,.proc-grid{grid-template-columns:1fr}
+  .footer-in{flex-direction:column;gap:36px;padding:36px 24px}
+  .f-links{flex-direction:column;gap:24px}
+  .footer-bot{padding:14px 24px;flex-direction:column;text-align:center}
+  .step-arr{display:none}
+  h2{font-size:28px}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ──────────────────────────────────── -->
+<nav id="nav">
+  <a class="nav-logo" href="#">DUCXL</a>
+  <ul class="nav-links">
+    <li><a href="#features">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#portal">Portal</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn btn-ghost" onclick="openPortal('login')">Login</button>
+    <button class="btn btn-primary" onclick="openPortal('signup')">Get Started</button>
+  </div>
+  <button class="burger" id="burger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mmenu">
+  <a href="#features" onclick="closeMenu()">Services</a>
+  <a href="#process"  onclick="closeMenu()">Process</a>
+  <a href="#pricing"  onclick="closeMenu()">Pricing</a>
+  <a href="#portal"   onclick="closeMenu()">Portal</a>
+  <button class="btn btn-primary" onclick="openPortal('signup');closeMenu()">Get Started Free</button>
+</div>
+
+<!-- ─── HERO ──────────────────────────────────── -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="badge reveal"><span class="bdot"></span>Accepting new projects</div>
+    <h1 class="reveal">Premium brands.<br><span class="text-teal">Built fast.</span><br>Built right.</h1>
+    <p class="hero-sub reveal">DUCXL is a design-as-a-service studio taking startups from raw idea to polished brand identity — fast, affordable, guaranteed.</p>
+    <div class="hero-cta reveal">
+      <button class="btn btn-primary btn-lg" onclick="scroll2('portal')">Start a Project <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="btn btn-ghost btn-lg" onclick="scroll2('process')">How it works</button>
+    </div>
+    <div class="stats reveal">
+      <div><span class="stat-n">120+</span><span class="stat-l">Projects done</span></div>
+      <div class="sdiv"></div>
+      <div><span class="stat-n">48hr</span><span class="stat-l">Avg turnaround</span></div>
+      <div class="sdiv"></div>
+      <div><span class="stat-n">100%</span><span class="stat-l">Pay-after-approve</span></div>
+    </div>
+  </div>
+  <div class="hero-vis">
+    <div class="mockup">
+      <div class="m-head">
+        <span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span>
+        <span class="m-url">ducxl.design · project #47</span>
+      </div>
+      <div class="m-body">
+        <div class="m-logo-row">
+          <div class="m-logo">FO</div>
+          <div><div class="m-brand">FounderOS</div><div class="m-tag">Brand Identity by DUCXL</div></div>
+        </div>
+        <div class="palette">
+          <div class="sw" style="background:#0f0f14"></div>
+          <div class="sw" style="background:#00ffd5"></div>
+          <div class="sw" style="background:#7b74ff"></div>
+          <div class="sw" style="background:#ff6040"></div>
+          <div class="sw" style="background:#f5f5f0"></div>
+        </div>
+        <div class="m-status">
+          <span class="sbadge ok">✓ Approved</span>
+          <span class="m-date">Delivered in 38h</span>
+        </div>
+      </div>
+    </div>
+    <div class="fc f1 reveal"><span class="i">✦</span><div><div class="ft">Brand delivered</div><div class="fs">2 minutes ago</div></div></div>
+    <div class="fc f2 reveal"><span class="i">⚡</span><div><div class="ft">Payment confirmed</div><div class="fs">via UPI · ₹2,999</div></div></div>
+  </div>
+</section>
+
+<!-- ─── MARQUEE ─────────────────────────────────── -->
+<div class="mq-wrap">
+  <div class="mq-track">
+    <span>Brand Identity</span><span class="s">✦</span><span>Logo Design</span><span class="s">✦</span>
+    <span>UI Systems</span><span class="s">✦</span><span>Pitch Decks</span><span class="s">✦</span>
+    <span>Social Kits</span><span class="s">✦</span><span>Typography</span><span class="s">✦</span>
+    <span>Color Systems</span><span class="s">✦</span><span>Motion Design</span><span class="s">✦</span>
+    <span>Brand Identity</span><span class="s">✦</span><span>Logo Design</span><span class="s">✦</span>
+    <span>UI Systems</span><span class="s">✦</span><span>Pitch Decks</span><span class="s">✦</span>
+    <span>Social Kits</span><span class="s">✦</span><span>Typography</span><span class="s">✦</span>
+    <span>Color Systems</span><span class="s">✦</span><span>Motion Design</span><span class="s">✦</span>
+  </div>
+</div>
+
+<!-- ─── FEATURES ──────────────────────────────── -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="eyebrow">Services</p>
+      <h2>Design that builds<br><span class="text-teal">trust at first glance</span></h2>
+      <p class="section-sub">Every service crafted for one goal — making your brand impossible to ignore.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card reveal">
+        <div class="feat-icon" style="background:rgba(0,255,213,.08);border-color:rgba(0,255,213,.2);color:var(--teal)">🎨</div>
+        <h3>Brand Identity</h3><p>Logo, colour palette, typography — a complete visual language for your company.</p>
+        <div class="popular-tag">Most popular</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon" style="background:rgba(123,116,255,.08);border-color:rgba(123,116,255,.2);color:var(--purple)">⬛</div>
+        <h3>UI Design System</h3><p>Scalable component libraries and design tokens your engineering team will love.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon" style="background:rgba(255,96,64,.08);border-color:rgba(255,96,64,.2);color:var(--coral)">📄</div>
+        <h3>Pitch Decks</h3><p>Investor-grade slide decks that communicate vision clearly and close rounds.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon" style="background:rgba(245,166,35,.08);border-color:rgba(245,166,35,.2);color:var(--amber)">📱</div>
+        <h3>Social Media Kit</h3><p>Templates for every platform — post, reel, banner, story — consistent and on-brand.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon" style="background:rgba(79,168,232,.08);border-color:rgba(79,168,232,.2);color:var(--blue)">🔐</div>
+        <h3>Secure Delivery</h3><p>All files delivered via our platform. Pay only after you approve the work.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon" style="background:rgba(0,255,213,.08);border-color:rgba(0,255,213,.2);color:var(--teal)">⚡</div>
+        <h3>48-hr Delivery</h3><p>Fast doesn't mean rushed. Our process is built for quality at startup speed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ────────────────────────────────── -->
+<section class="section section-dark" id="process">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="eyebrow">Process</p>
+      <h2>Four steps to a<br><span class="text-teal">brand you're proud of</span></h2>
+    </div>
+    <div class="proc-grid">
+      <div class="proc-step reveal">
+        <div class="step-n">01</div>
+        <h3>Submit your brief</h3>
+        <p>Tell us about your project, audience, and aesthetic vision through our client portal.</p>
+        <span class="step-arr">→</span>
+      </div>
+      <div class="proc-step reveal">
+        <div class="step-n">02</div>
+        <h3>We get to work</h3>
+        <p>Our team begins immediately. Progress updates throughout — full visibility, no black box.</p>
+        <span class="step-arr">→</span>
+      </div>
+      <div class="proc-step reveal">
+        <div class="step-n">03</div>
+        <h3>Review &amp; approve</h3>
+        <p>Your designs arrive for review. Request revisions freely until you're 100% satisfied.</p>
+        <span class="step-arr">→</span>
+      </div>
+      <div class="proc-step reveal">
+        <div class="step-n">04</div>
+        <h3>Pay &amp; download</h3>
+        <p>Pay securely via UPI only after you approve. All source files delivered instantly.</p>
+        <span class="step-arr step-last"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRICING ────────────────────────────────── -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="eyebrow">Pricing</p>
+      <h2>Simple, transparent<br><span class="text-teal">pricing</span></h2>
+      <p class="section-sub">No hidden fees. Pay per project, pay after you approve.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card reveal">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">₹999</div>
+        <div class="plan-desc">Perfect for early-stage ideas and MVPs</div>
+        <ul class="plan-feats">
+          <li>✓ Logo design — 3 concepts</li>
+          <li>✓ Brand colour palette</li>
+          <li>✓ Font pairing guide</li>
+          <li>✓ 48-hr delivery</li>
+          <li>✓ PNG + SVG files</li>
+        </ul>
+        <button class="btn btn-outline w100" onclick="pickPlan('Starter','999')">Choose Starter</button>
+      </div>
+      <div class="price-card feat reveal">
+        <div class="plan-tag">Most Popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">₹2,999</div>
+        <div class="plan-desc">Full brand identity for serious startups</div>
+        <ul class="plan-feats">
+          <li>✓ Everything in Starter</li>
+          <li>✓ Brand guidelines PDF</li>
+          <li>✓ Business card design</li>
+          <li>✓ Social media kit (6 templates)</li>
+          <li>✓ Unlimited revisions</li>
+          <li>✓ Figma source files</li>
+        </ul>
+        <button class="btn btn-primary w100" onclick="pickPlan('Pro','2999')">Choose Pro</button>
+      </div>
+      <div class="price-card reveal">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-price">Custom</div>
+        <div class="plan-desc">Agencies, retainers &amp; white-label</div>
+        <ul class="plan-feats">
+          <li>✓ Everything in Pro</li>
+          <li>✓ Dedicated designer</li>
+          <li>✓ Monthly retainer plans</li>
+          <li>✓ White-label available</li>
+          <li>✓ Priority delivery</li>
+          <li>✓ Direct Slack support</li>
+        </ul>
+        <button class="btn btn-outline w100" onclick="pickPlan('Enterprise','custom')">Contact Us</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CLIENT PORTAL ──────────────────────────── -->
+<section class="section section-dark" id="portal">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="eyebrow">Client Portal</p>
+      <h2>Your project dashboard</h2>
+      <p class="section-sub">Submit work, track status, and pay — all in one place.</p>
+    </div>
+
+    <!-- LOGIN / SIGNUP -->
+    <div id="pv-auth" class="portal-wrap">
+      <div class="auth-card reveal">
+        <div class="auth-tabs">
+          <button class="atab on" id="t-login"  onclick="swTab('login')">Login</button>
+          <button class="atab"    id="t-signup" onclick="swTab('signup')">Sign Up</button>
+        </div>
+        <div id="f-login">
+          <div class="form-group"><label>Email</label><input type="email" id="l-email" placeholder="you@startup.com"/></div>
+          <div class="form-group"><label>Password</label><input type="password" id="l-pass" placeholder="••••••••"/></div>
+          <button class="btn btn-primary w100" onclick="doLogin()">Login to Portal</button>
+          <p class="auth-note">Admin? Use your admin credentials.</p>
+        </div>
+        <div id="f-signup" style="display:none">
+          <div class="form-group"><label>Full Name</label><input type="text" id="s-name" placeholder="Your name"/></div>
+          <div class="form-group"><label>Email</label><input type="email" id="s-email" placeholder="you@startup.com"/></div>
+          <div class="form-group"><label>Password</label><input type="password" id="s-pass" placeholder="Min. 8 characters"/></div>
+          <button class="btn btn-primary w100" onclick="doSignup()">Create Free Account</button>
+        </div>
+        <div class="msg" id="auth-msg"></div>
+      </div>
+    </div>
+
+    <!-- CLIENT DASHBOARD -->
+    <div id="pv-dash" class="portal-wrap" style="display:none">
+      <div class="dash-hdr reveal">
+        <div><h3 id="greet">Welcome back 👋</h3><p class="dash-sub">Manage your projects and payments</p></div>
+        <button class="btn btn-ghost btn-sm" onclick="doLogout()">Logout</button>
+      </div>
+      <div class="dash-grid">
+        <div>
+          <div class="dash-stitle">Submit New Project</div>
+          <div class="proj-form">
+            <div class="form-group"><label>Project Name</label><input type="text" id="pj-name" placeholder="e.g. FounderOS App Launch"/></div>
+            <div class="form-group">
+              <label>Service</label>
+              <select id="pj-svc">
+                <option value="">Select a service...</option>
+                <option>Brand Identity</option>
+                <option>Logo Design Only</option>
+                <option>UI Design System</option>
+                <option>Pitch Deck</option>
+                <option>Social Media Kit</option>
+                <option>Full Brand Package (Pro)</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Brief — tell us everything</label>
+              <textarea id="pj-brief" rows="4" placeholder="Describe your brand, audience, competitors you admire, aesthetic direction..."></textarea></div>
+            <div class="form-group"><label>Reference links (optional)</label>
+              <input type="text" id="pj-refs" placeholder="Figma, Pinterest, website URLs..."/></div>
+            <button class="btn btn-primary" onclick="submitProj()">Submit Project →</button>
+            <div class="msg" id="proj-msg"></div>
+          </div>
+
+          <div class="dash-stitle" style="margin-top:30px">Your Projects</div>
+          <div id="proj-list"><div class="empty">No projects yet — submit one above.</div></div>
+        </div>
+        <div class="sidebar">
+          <div class="sc">
+            <div class="sc-title">Quick Pay via UPI</div>
+            <p class="sc-sub">Once your project is approved, pay and submit your Transaction ID here.</p>
+            <a id="upi-link" href="upi://pay?pa=skdharani630@oksbi&pn=DUCXL&cu=INR"
+               class="btn btn-primary w100" style="display:block;text-align:center;padding:12px;margin-bottom:10px"
+               target="_blank">Open UPI App ↗</a>
+            <div class="form-group"><label>UPI Transaction ID</label>
+              <input type="text" id="txn" placeholder="e.g. UPI12345678901"/></div>
+            <button class="btn btn-outline w100" onclick="submitPay()">Confirm Payment</button>
+            <div class="msg" id="pay-msg"></div>
+          </div>
+          <div class="sc">
+            <div class="sc-title">Need help?</div>
+            <p class="sc-sub">We reply within 2 hours during business hours.</p>
+            <a href="mailto:skdrago777@gmail.com" class="btn btn-ghost w100" style="display:block;text-align:center">Email Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="pv-admin" class="portal-wrap" style="display:none">
+      <div class="dash-hdr">
+        <div><h3>Admin Panel</h3><p class="dash-sub">Manage all projects and payments</p></div>
+        <button class="btn btn-ghost btn-sm" onclick="doLogout()">Logout</button>
+      </div>
+      <div class="admin-tabs">
+        <button class="atab on" id="at-proj" onclick="swAdmin('proj')">Projects</button>
+        <button class="atab"    id="at-pay"  onclick="swAdmin('pay')">Payments</button>
+      </div>
+      <div id="admin-proj"><div class="empty">Loading...</div></div>
+      <div id="admin-pay" style="display:none"><div class="empty">Loading...</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ──────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="eyebrow">Clients</p>
+      <h2>Trusted by founders<br><span class="text-teal">who move fast</span></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="quote">"</div>
+        <p>DUCXL delivered our entire brand in 36 hours. Quality indistinguishable from agencies charging 10x more.</p>
+        <div class="testi-author"><div class="av">RK</div><div><strong>Rahul K.</strong><span>Founder, StackOps</span></div></div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="quote">"</div>
+        <p>The pay-after-approval model is a game changer. Total trust in the process — the result blew us away.</p>
+        <div class="testi-author"><div class="av">PV</div><div><strong>Priya V.</strong><span>CEO, NovaMed</span></div></div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="quote">"</div>
+        <p>We needed a pitch deck for a Series A meeting in 48 hours. DUCXL made it happen. We got the meeting.</p>
+        <div class="testi-author"><div class="av">AM</div><div><strong>Arjun M.</strong><span>CTO, BuildSpark</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FINAL CTA ──────────────────────────────── -->
+<section class="section cta-sec">
+  <div class="cta-glow"></div>
+  <div class="container">
+    <div class="cta-inner reveal">
+      <h2>Your brand is your first impression.<br><span class="text-teal">Make it unforgettable.</span></h2>
+      <p>Start your project today. Pay only when you love it.</p>
+      <button class="btn btn-primary btn-lg" onclick="scroll2('portal')">Launch Your Brand →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────── -->
+<footer>
+  <div class="footer-in container">
+    <div class="f-brand">
+      <div class="f-logo">DUCXL</div>
+      <p>Premium design for ambitious startups. Fast delivery, fair pricing, guaranteed satisfaction.</p>
+    </div>
+    <div class="f-links">
+      <div class="f-col">
+        <h4>Services</h4>
+        <a href="#features">Brand Identity</a>
+        <a href="#features">UI Systems</a>
+        <a href="#features">Pitch Decks</a>
+        <a href="#features">Social Kits</a>
+      </div>
+      <div class="f-col">
+        <h4>Company</h4>
+        <a href="#process">How it Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#portal">Client Portal</a>
+        <a href="mailto:skdrago777@gmail.com">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bot">
+    <p>© 2025 DUCXL. All rights reserved.</p>
+    <p>UPI: skdharani630@oksbi</p>
+  </div>
+</footer>
+
+<!-- ─── FIREBASE SDK ───────────────────────────── -->
+<script type="module">
+// ════════════════════════════════════════════════
+//  🔧 STEP 1: Paste your Firebase config here
+// ════════════════════════════════════════════════
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
+         signOut, onAuthStateChanged }
+         from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, collection, addDoc, onSnapshot,
+         query, where, orderBy, doc, updateDoc, serverTimestamp }
+         from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const FIREBASE_CONFIG = {
+  apiKey:            "YOUR_API_KEY",
+  authDomain:        "YOUR_PROJECT.firebaseapp.com",
+  projectId:         "YOUR_PROJECT_ID",
+  storageBucket:     "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId:             "YOUR_APP_ID"
+};
+// ════════════════════════════════════════════════
+//  🔧 STEP 2: Set your admin email
+// ════════════════════════════════════════════════
+const ADMIN = "skdrago777@gmail.com";
+// ════════════════════════════════════════════════
+
+const app  = initializeApp(FIREBASE_CONFIG);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+let CU = null; // current user
+
+// ── SCROLL REVEAL ─────────────────────────────
+const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add("vis"); }), {threshold:.1});
+document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+
+// ── NAV ───────────────────────────────────────
+window.toggleMenu = () => document.getElementById("mmenu").classList.toggle("open");
+window.closeMenu  = () => document.getElementById("mmenu").classList.remove("open");
+window.scroll2    = id => document.getElementById(id)?.scrollIntoView({behavior:"smooth"});
+
+// ── AUTH LISTENER ─────────────────────────────
+onAuthStateChanged(auth, user => {
+  CU = user;
+  if(user) {
+    user.email === ADMIN ? showPanel("admin") : showPanel("dash");
+    if(user.email !== ADMIN) {
+      document.getElementById("greet").textContent = "Welcome back 👋";
+      loadMyProjects();
+    } else {
+      loadAdminProjects();
+    }
+  } else {
+    showPanel("auth");
+  }
+});
+
+function showPanel(p) {
+  ["pv-auth","pv-dash","pv-admin"].forEach(id => document.getElementById(id).style.display = "none");
+  document.getElementById("pv-"+p).style.display = "block";
+  document.getElementById("portal")?.scrollIntoView({behavior:"smooth"});
+}
+
+// ── AUTH TABS ─────────────────────────────────
+window.swTab = t => {
+  ["login","signup"].forEach(x => {
+    document.getElementById("t-"+x).classList.toggle("on", x===t);
+    document.getElementById("f-"+x).style.display = x===t ? "block" : "none";
+  });
+};
+
+// ── LOGIN ─────────────────────────────────────
+window.doLogin = async () => {
+  const e = v("l-email"), p = v("l-pass"), m = mid("auth-msg");
+  if(!e||!p) return showMsg(m,"Please fill in all fields.","err");
+  showMsg(m,'<span class="spinner"></span>Signing in…',"ok");
+  try {
+    await signInWithEmailAndPassword(auth, e, p);
+  } catch(err) { showMsg(m, fe(err.code), "err"); }
+};
+
+// ── SIGNUP ────────────────────────────────────
+window.doSignup = async () => {
+  const n = v("s-name"), e = v("s-email"), p = v("s-pass"), m = mid("auth-msg");
+  if(!n||!e||!p) return showMsg(m,"Please fill in all fields.","err");
+  if(p.length<8) return showMsg(m,"Password must be at least 8 characters.","err");
+  showMsg(m,'<span class="spinner"></span>Creating account…',"ok");
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, e, p);
+    await addDoc(collection(db,"users"), {uid:cred.user.uid, name:n, email:e, createdAt:serverTimestamp()});
+  } catch(err) { showMsg(m, fe(err.code), "err"); }
+};
+
+// ── LOGOUT ────────────────────────────────────
+window.doLogout = async () => { await signOut(auth); showPanel("auth"); };
+
+// ── PORTAL OPEN ───────────────────────────────
+window.openPortal = t => { scroll2("portal"); setTimeout(()=>{swTab(t);},300); };
+
+// ── PICK PLAN ─────────────────────────────────
+window.pickPlan = (plan, price) => {
+  scroll2("portal");
+  if(!CU) { setTimeout(()=>swTab("signup"),400); return; }
+  if(price!=="custom") document.getElementById("pj-svc").value =
+    plan==="Starter" ? "Logo Design Only" : "Full Brand Package (Pro)";
+};
+
+// ── SUBMIT PROJECT ────────────────────────────
+window.submitProj = async () => {
+  const name  = v("pj-name"), svc = v("pj-svc"), brief = v("pj-brief"), refs = v("pj-refs");
+  const m = mid("proj-msg");
+  if(!name||!svc||!brief) return showMsg(m,"Please fill in name, service, and brief.","err");
+  showMsg(m,'<span class="spinner"></span>Submitting…',"ok");
+  try {
+    await addDoc(collection(db,"projects"), {
+      userId:CU.uid, userEmail:CU.email, name, svc, brief, refs,
+      status:"pending", paid:false, createdAt:serverTimestamp()
+    });
+    showMsg(m,"✓ Project submitted! We'll review within 2 hours.","ok");
+    ["pj-name","pj-brief","pj-refs"].forEach(id => document.getElementById(id).value="");
+    document.getElementById("pj-svc").value="";
+  } catch(e) { showMsg(m,"Failed to submit. Please try again.","err"); }
+};
+
+// ── SUBMIT PAYMENT ────────────────────────────
+window.submitPay = async () => {
+  const txn = v("txn"), m = mid("pay-msg");
+  if(!txn||txn.length<8) return showMsg(m,"Enter a valid UPI Transaction ID.","err");
+  showMsg(m,'<span class="spinner"></span>Submitting for verification…',"ok");
+  try {
+    // Check for duplicates
+    const existing = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js")
+      .then(({getDocs, query, collection, where}) =>
+        getDocs(query(collection(db,"payments"), where("txn","==",txn.toUpperCase()))));
+    if(!existing.empty) return showMsg(m,"This Transaction ID has already been submitted.","err");
+
+    await addDoc(collection(db,"payments"),{
+      txn:txn.toUpperCase(), userId:CU.uid, userEmail:CU.email,
+      status:"pending", createdAt:serverTimestamp()
+    });
+    showMsg(m,"✓ Payment submitted! We'll verify within 30 minutes.","ok");
+    document.getElementById("txn").value="";
+  } catch(e) { showMsg(m,"Failed. Please try again.","err"); }
+};
+
+// ── LOAD USER PROJECTS ────────────────────────
+function loadMyProjects() {
+  const el = document.getElementById("proj-list");
+  if(!CU) return;
+  const q = query(collection(db,"projects"), where("userId","==",CU.uid), orderBy("createdAt","desc"));
+  onSnapshot(q, snap => {
+    if(snap.empty){ el.innerHTML='<div class="empty">No projects yet — submit one above.</div>'; return; }
+    el.innerHTML = snap.docs.map(d => {
+      const p=d.data(), dt=p.createdAt?.toDate?.()?.toLocaleDateString()||"Just now";
+      const bc=p.status==="approved"?"approved":p.status==="complete"?"complete":"pending";
+      const bl=p.status==="approved"?"✓ Approved":p.status==="complete"?"Complete":"Under Review";
+      return `<div class="proj-card">
+        <div><h4>${esc(p.name)}</h4><p>${esc(p.svc)} · ${dt}</p></div>
+        <span class="pbadge ${bc}">${bl}</span>
+      </div>`;
+    }).join("");
+  });
+}
+
+// ── ADMIN: LOAD PROJECTS ──────────────────────
+function loadAdminProjects() {
+  const el = document.getElementById("admin-proj");
+  const q  = query(collection(db,"projects"), orderBy("createdAt","desc"));
+  onSnapshot(q, snap => {
+    if(snap.empty){ el.innerHTML='<div class="empty">No projects yet.</div>'; return; }
+    el.innerHTML = snap.docs.map(d => {
+      const p=d.data(), id=d.id, dt=p.createdAt?.toDate?.()?.toLocaleDateString()||"";
+      return `<div class="admin-card">
+        <div class="admin-card-hdr">
+          <div>
+            <div class="admin-card-title">${esc(p.name)} — ${esc(p.svc)}</div>
+            <div class="admin-card-user">${esc(p.userEmail)} · ${dt}</div>
+          </div>
+          <span class="pbadge ${p.status}">${p.status}</span>
+        </div>
+        <p class="admin-card-brief">${esc((p.brief||"").substring(0,200))}${(p.brief||"").length>200?"…":""}</p>
+        <div style="display:flex;gap:10px">
+          ${p.status==="pending" ? `<button class="btn-approve" onclick="approveProj('${id}','approved')">Mark Approved</button>`:""}
+          ${p.status==="approved"? `<button class="btn-approve" onclick="approveProj('${id}','complete')">Mark Complete</button>`:""}
+        </div>
+      </div>`;
+    }).join("");
+  });
+}
+
+// ── ADMIN: LOAD PAYMENTS ──────────────────────
+function loadAdminPayments() {
+  const el = document.getElementById("admin-pay");
+  const q  = query(collection(db,"payments"), orderBy("createdAt","desc"));
+  onSnapshot(q, snap => {
+    if(snap.empty){ el.innerHTML='<div class="empty">No payments yet.</div>'; return; }
+    el.innerHTML = snap.docs.map(d => {
+      const p=d.data(), id=d.id;
+      return `<div class="admin-card">
+        <div class="admin-card-hdr">
+          <div>
+            <div class="admin-card-title">TXN: ${esc(p.txn)}</div>
+            <div class="admin-card-user">${esc(p.userEmail||p.userId)}</div>
+          </div>
+          <span class="pbadge ${p.status}">${p.status}</span>
+        </div>
+        ${p.status==="pending"?`<button class="btn-approve" onclick="approvePay('${id}','${p.userId}')">Approve Payment</button>`:""}
+      </div>`;
+    }).join("");
+  });
+}
+
+// ── ADMIN ACTIONS ─────────────────────────────
+window.approveProj = async (id, status) => {
+  await updateDoc(doc(db,"projects",id), {status});
+};
+window.approvePay = async (id, userId) => {
+  await updateDoc(doc(db,"payments",id), {status:"approved", approvedAt:serverTimestamp()});
+  if(userId) await updateDoc(doc(db,"users",userId), {subscription:"active"}).catch(()=>{});
+};
+
+// ── ADMIN TABS ────────────────────────────────
+window.swAdmin = t => {
+  ["proj","pay"].forEach(x => {
+    document.getElementById("at-"+x).classList.toggle("on",x===t);
+    document.getElementById("admin-"+x).style.display=x===t?"block":"none";
+  });
+  if(t==="pay") loadAdminPayments();
+};
+
+// ── HELPERS ───────────────────────────────────
+const v   = id => document.getElementById(id)?.value?.trim()||"";
+const mid = id => document.getElementById(id);
+const esc = s  => String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+function showMsg(el, msg, type) {
+  el.innerHTML=msg; el.className="msg "+type;
+  if(type==="ok"&&!msg.includes("spinner")) setTimeout(()=>{el.style.display="none";},6000);
+}
+
+function fe(code) {
+  const m = {
+    "auth/user-not-found":"No account with that email.",
+    "auth/wrong-password":"Incorrect password.",
+    "auth/email-already-in-use":"An account with this email already exists.",
+    "auth/weak-password":"Password must be at least 6 characters.",
+    "auth/invalid-email":"Please enter a valid email.",
+    "auth/too-many-requests":"Too many attempts. Try again later.",
+  };
+  return m[code]||"Something went wrong. Please try again.";
+}
+</script>
+</body>
+</html>
